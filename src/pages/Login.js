@@ -14,17 +14,16 @@ const Login = () => {
     e.preventDefault();
     try {
       const response = await axios.post(
-        "http://localhost:5000/api/auth/login",
-        credentials
+        `${process.env.REACT_APP_API_URL || 'http://localhost:5000/api'}/auth/login`,
+        credentials,
+        { withCredentials: true }
       );
-      const { token, role, username } = response.data;
+      const { role, username } = response.data;
 
-      // Stockage du token et rôle dans le localStorage
-      localStorage.setItem("token", token);
       localStorage.setItem("username", username);
       localStorage.setItem("role", role);
 
-      navigate("/"); // Redirige vers la page d'accueil après la connexion
+      navigate("/");
     } catch (error) {
       // Gestion des erreurs
       if (error.response) {

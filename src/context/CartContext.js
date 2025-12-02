@@ -18,6 +18,7 @@ export const cartReducer = (state, action) => {
         return {
           ...state,
           cart: [...state.cart, { ...action.payload, quantity: 1 }],
+
         };
       }
 

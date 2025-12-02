@@ -22,7 +22,7 @@ const Register = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.post('http://localhost:5000/api/auth/register', formData);
+      await axios.post(`${process.env.REACT_APP_API_URL}/auth/register`, formData);
       alert('Inscription réussie ! Vous pouvez maintenant vous connecter.');
       navigate('/login');
     } catch (err) {
@@ -42,16 +42,16 @@ const Register = () => {
 
   return (
     <div className="flex justify-center items-center h-screen">
-      <form onSubmit={handleSubmit} className="bg-white p-6 rounded shadow-md w-80">
-        <h2 className="text-2xl font-bold mb-4 text-center">Inscription</h2>
-        {error && <p className="text-red-500 mb-4">{error}</p>}
+      <form onSubmit={handleSubmit} className="p-6 w-80 bg-white rounded shadow-md">
+        <h2 className="mb-4 text-2xl font-bold text-center">Inscription</h2>
+        {error && <p className="mb-4 text-red-500">{error}</p>}
         <input
           type="text"
           name="username"
           placeholder="Nom d'utilisateur"
           value={formData.username}
           onChange={handleChange}
-          className="border border-gray-300 p-2 w-full mb-4"
+          className="p-2 mb-4 w-full border border-gray-300"
         />
         <input
           type="email"
@@ -59,7 +59,7 @@ const Register = () => {
           placeholder="Adresse email"
           value={formData.email}
           onChange={handleChange}
-          className="border border-gray-300 p-2 w-full mb-4"
+          className="p-2 mb-4 w-full border border-gray-300"
         />
         <input
           type="password"
@@ -67,9 +67,9 @@ const Register = () => {
           placeholder="Mot de passe"
           value={formData.password}
           onChange={handleChange}
-          className="border border-gray-300 p-2 w-full mb-4"
+          className="p-2 mb-4 w-full border border-gray-300"
         />
-        <button type="submit" className="bg-blue-500 text-white p-2 w-full rounded">S'inscrire</button>
+        <button type="submit" className="p-2 w-full text-white bg-blue-500 rounded">S'inscrire</button>
       </form>
     </div>
   );
